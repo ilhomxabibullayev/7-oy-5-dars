@@ -1,10 +1,21 @@
 import React from 'react'
+'use client'
 import './Admin.css'
 
 const Admin = () => {
+    async function handleSubmit(event) {
+        event.preventDefolt();
+        const form = event.target;
+        const data = new FormData(form);
+        const res = await fetch('http://localhost:5000/products', {
+            method: 'Post',
+            body: data,
+        })
+        console.log(res);
+    }
     return (
         <div className='container form__container'>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="name">Name:</label>
                     <input type="text" id='name' name='name' />
